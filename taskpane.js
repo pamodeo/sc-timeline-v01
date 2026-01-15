@@ -260,7 +260,7 @@ function buildJsonPayload(data) {
 function showStatus(message, type) {
   const statusDiv = document.getElementById('status');
   statusDiv.textContent = message;
-  statusDiv.className = 'status-message '+ ${type};
+  statusDiv.className = `status-message ${type}`;
   statusDiv.style.display = 'block';
 }
 

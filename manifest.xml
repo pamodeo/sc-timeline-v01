@@ -6,7 +6,7 @@
            xsi:type="MailApp">
  <!-- IMPORTANT: Generate a unique GUID for your add-in -->
   <!-- You can use: https://www.guidgenerator.com/ -->
-  <Id>a63067dc-80de-417a-8adc-31c8b53e2b61</Id>
+  <Id>cc944e1a-af6f-447f-ae85-68d797aae57a</Id>
   
   <Version>1.0.0.0</Version>
   <ProviderName>Octave</ProviderName>
