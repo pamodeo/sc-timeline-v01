@@ -127,16 +127,16 @@ async function syncToTimeline() {
       
       if (response.ok) {
         showStatus('Appointment sent to Timeline successfully!', 'success');
-        const openTenant = confirm('Appointment sent to Databridge Pro for Timeline process sync.\\n\\nSelect OK to login to the Timeline tenant\\nSelect Cancel to close');
+        const openTenant = confirm('Appointment sent to Databridge Pro for Timeline process sync.\\n\\nSelect OK to login to the Timeline tenant\nSelect Cancel to close');
         if (openTenant) {
           window.open('https://eu1.eam.hxgnsmartcloud.com/web/base/logindisp?tenant=HXGNDEMO0016_DEM', '_blank');
         }
       } else {
         const errorText = await response.text();
-        showStatus(\`Error: \${response.status} - \${errorText}\`, 'error');
+        showStatus('Error: ' + ${response.status} + ' - ' ${errorText}, 'error');
       }
     } catch (error) {
-      showStatus(\`Error: \${error.message}\`, 'error');
+      showStatus('Error: ' + ${error.message}, 'error');
     }
   });
 }
@@ -214,7 +214,8 @@ function buildJsonPayload(data) {
     const hours = String(d.getHours()).padStart(2, '0');
     const minutes = String(d.getMinutes()).padStart(2, '0');
     const seconds = String(d.getSeconds()).padStart(2, '0');
-    return \`\${day}/\${month}/\${year} \${hours}:\${minutes}:\${seconds}\`;
+	const myDate = ${day}+'/'+${month}+'/' + ${year}+' '+ ${hours}+':'+${minutes}+':'+${seconds};
+    return myDate;
   };
   
   // Clean body
@@ -257,10 +258,11 @@ function buildJsonPayload(data) {
 function showStatus(message, type) {
   const statusDiv = document.getElementById('status');
   statusDiv.textContent = message;
-  statusDiv.className = \`status-message \${type}\`;
+  statusDiv.className = 'status-message '+ ${type};
   statusDiv.style.display = 'block';
 }
 
 function closePane() {
   Office.context.ui.closeContainer();
+
 }
