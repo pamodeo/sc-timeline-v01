@@ -133,11 +133,11 @@ async function syncToTimeline() {
         }
       } else {
         const errorText = await response.text();
-		const msgTextErr1 = 'Error: ' + ${response.status} + ' - ' ${errorText};
+		const msgTextErr1 = `Error: ${response.status} - ${errorText}`;
         showStatus(msgTextErr1, 'error');
       }
     } catch (error) {
-		const msgTextErr2 = 'Error: ' + ${error.message};
+		const msgTextErr2 = `Error: ${error.message}`;
       showStatus(msgTextErr2, 'error');
     }
   });
@@ -216,7 +216,7 @@ function buildJsonPayload(data) {
     const hours = String(d.getHours()).padStart(2, '0');
     const minutes = String(d.getMinutes()).padStart(2, '0');
     const seconds = String(d.getSeconds()).padStart(2, '0');
-	const myDate = ${day}+'/'+${month}+'/' + ${year}+' '+ ${hours}+':'+${minutes}+':'+${seconds};
+	const myDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
     return myDate;
   };
   
