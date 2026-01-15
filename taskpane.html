@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Timeline Sync</title>
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <link rel="stylesheet" href="taskpane.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Timeline Sync</h2>
+        </header>
+        
+        <main>
+            <div class="form-group">
+                <label for="activityType">Activity Type *</label>
+                <select id="activityType" class="form-control">
+                    <option value="">-- Select Activity Type --</option>
+                    <option value="BVA_VE">BVA_VE</option>
+                    <option value="DEMO">DEMO</option>
+                    <option value="DISCOVERY">DISCOVERY</option>
+                    <option value="HANDOVER">HANDOVER</option>
+                    <option value="MANAGEMENT">MANAGEMENT</option>
+                    <option value="PREPARATION">PREPARATION</option>
+                    <option value="POC">POC</option>
+                    <option value="PTO">PTO</option>
+                    <option value="RFP_RFI">RFP_RFI</option>
+                    <option value="STRATEGY">STRATEGY</option>
+                    <option value="SUPPORT">SUPPORT</option>
+                    <option value="TRAINING">TRAINING</option>
+                    <option value="WEBINAR">WEBINAR</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="engagementType">Engagement Type *</label>
+                <select id="engagementType" class="form-control">
+                    <option value="">-- Select Engagement Type --</option>
+                    <option value="CUSTOMER">CUSTOMER</option>
+                    <option value="EVENT">EVENT</option>
+                    <option value="INTERNAL">INTERNAL</option>
+                    <option value="MARKETING">MARKETING</option>
+                    <option value="OTHER">OTHER</option>
+                    <option value="PARTNER">PARTNER</option>
+                    <option value="PROSPECT">PROSPECT</option>
+                    <option value="TENANT-P">TENANT-P</option>
+                    <option value="TENANT-S">TENANT-S</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="customerEvent">Customer Event *</label>
+                <input type="text" id="customerEvent" class="form-control" placeholder="Enter customer event">
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="onSite"> On Site
+                </label>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="custInteraction"> Customer Interaction
+                </label>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="clevel"> C-Level
+                </label>
+            </div>
+
+            <div class="button-group">
+                <button id="btnSync" class="btn btn-primary" disabled>Sync to Timeline</button>
+                <button id="btnCancel" class="btn btn-secondary">Cancel</button>
+            </div>
+
+            <div id="status" class="status-message"></div>
+            
+            <div class="tenant-link">
+                <a href="https://eu1.eam.hxgnsmartcloud.com/web/base/logindisp?tenant=HXGNDEMO0016_DEM" target="_blank">
+                    Open Timeline Tenant
+                </a>
+            </div>
+        </main>
+    </div>
+    <script src="taskpane.js"></script>
+</body>
+</html>
