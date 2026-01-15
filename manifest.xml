@@ -6,7 +6,7 @@
            xsi:type="MailApp">
  <!-- IMPORTANT: Generate a unique GUID for your add-in -->
   <!-- You can use: https://www.guidgenerator.com/ -->
-  <Id>ab10e473-086d-41c7-895e-f04e79bf1dac</Id>
+  <Id>cbb9ce32-1a9e-400d-8ce2-9f7cfa3b4835</Id>
   
   <Version>1.0.0.0</Version>
   <ProviderName>Octave</ProviderName>
@@ -38,7 +38,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://pamodeo.github.io/sc-timeline-v01/main/taskpane.html"/>
+        <SourceLocation DefaultValue="https://pamodeo.github.io/sc-timeline-v01/taskpane.html"/>
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
