@@ -133,10 +133,12 @@ async function syncToTimeline() {
         }
       } else {
         const errorText = await response.text();
-        showStatus('Error: ' + ${response.status} + ' - ' ${errorText}, 'error');
+		const msgTextErr1 = 'Error: ' + ${response.status} + ' - ' ${errorText};
+        showStatus(msgTextErr1, 'error');
       }
     } catch (error) {
-      showStatus('Error: ' + ${error.message}, 'error');
+		const msgTextErr2 = 'Error: ' + ${error.message};
+      showStatus(msgTextErr2, 'error');
     }
   });
 }
