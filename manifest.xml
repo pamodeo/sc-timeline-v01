@@ -9,19 +9,19 @@
   <Id>a1b2c3d4-e5f6-7890-abcd-ef1234567890</Id>
   
   <Version>1.0.0.0</Version>
-  <ProviderName>Your Company Name</ProviderName>
+  <ProviderName>Octave</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Timeline Sync"/>
   <Description DefaultValue="Sync Outlook appointments to Timeline system"/>
   
   <!-- Use raw GitHub URLs for icons -->
-  <IconUrl DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/assets/icons/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/assets/icons/icon-64.png"/>
+  <IconUrl DefaultValue="https://pamodeo.github.io/sc-timeline-v01/main/assets/icons/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://pamodeo.github.io//main/assets/icons/icon-64.png"/>
   
   <SupportUrl DefaultValue="https://github.com/pamodeo/sc-timeline-v01"/>
   
   <AppDomains>
-    <AppDomain>https://raw.githubusercontent.com</AppDomain>
+    <AppDomain>https://pamodeo.github.io/</AppDomain>
     <AppDomain>https://dataflow-inbound-message-prd-euc1.eam.hxgnsmartcloud.com</AppDomain>
   </AppDomains>
   
@@ -38,7 +38,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/taskpane.html"/>
+        <SourceLocation DefaultValue="https://pamodeo.github.io/sc-timeline-v01/main/taskpane.html"/>
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -124,14 +124,14 @@
       
       <Resources>
         <bt:Images>
-          <bt:Image id="Icon.16x16" DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/assets/icons/icon-16.png"/>
-          <bt:Image id="Icon.32x32" DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/assets/icons/icon-32.png"/>
-          <bt:Image id="Icon.80x80" DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/assets/icons/icon-80.png"/>
+          <bt:Image id="Icon.16x16" DefaultValue="https://pamodeo.github.io/assets/icons/icon-16.png"/>
+          <bt:Image id="Icon.32x32" DefaultValue="https://pamodeo.github.io/assets/icons/icon-32.png"/>
+          <bt:Image id="Icon.80x80" DefaultValue="https://pamodeo.github.io/assets/icons/icon-80.png"/>
         </bt:Images>
         
         <bt:Urls>
-          <bt:Url id="Commands.Url" DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/commands.html"/>
-          <bt:Url id="Taskpane.Url" DefaultValue="https://raw.githubusercontent.com/pamodeo/sc-timeline-v01/main/taskpane.html"/>
+          <bt:Url id="Commands.Url" DefaultValue="https://pamodeo.github.io/main/commands.html"/>
+          <bt:Url id="Taskpane.Url" DefaultValue="https://pamodeo.github.io/taskpane.html"/>
         </bt:Urls>
         
         <bt:ShortStrings>
