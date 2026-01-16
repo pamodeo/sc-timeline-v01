@@ -313,4 +313,5 @@ function showStatus(message, type) {
 function closePane() {
   Office.context.ui.closeContainer();
 
+
 }
