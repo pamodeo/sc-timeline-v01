@@ -247,6 +247,11 @@ function buildJsonPayload(data) {
     engagementType = '';
   }
   const CreationTime = new Date().toISOString();
+  const OnSite = data.onSite.toString();
+  const CustInteraction = data.custInteraction.toString();
+  const Clevel = data.clevel.toString();
+  const Location =  data.location || '';
+  
   const payload = {
     EntryID: Office.context.mailbox.item.itemId || '',
     globalID: Office.context.mailbox.item.itemId || '',
@@ -258,13 +263,13 @@ function buildJsonPayload(data) {
     Subject: data.custEvt,
     Start: formatDate(data.start),
     End: formatDate(data.end),
-    Location: data.location || '',
+    Location: Location,
     CreationTime: CreationTime,
-    ActivityType: data.activityType,
+    ActivityType: data.actType,
     EngagementType: engagementType,
-    OnSite: data.onSite.toString(),
-    CustInteraction: data.custInteraction.toString(),
-    Clevel: data.clevel.toString(),
+    OnSite: onSite,
+    CustInteraction: CustInteraction,
+    Clevel: Clevel,
     Note: cleanBody
   };
   
