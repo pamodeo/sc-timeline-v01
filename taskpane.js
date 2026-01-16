@@ -13,8 +13,11 @@ Office.onReady((info) => {
     engagementType.addEventListener('change', validateForm);
     customerEvent.addEventListener('input', validateForm);
     
-    // Load existing values
+	// Initial load
     loadExistingValues();
+    
+    // Safety check: Run validation once manually after a short delay
+    setTimeout(validateForm, 500);
   }
 });
 
@@ -50,20 +53,21 @@ function loadExistingValues() {
     if (result.status === Office.AsyncResultStatus.Succeeded) {
       const customProps = result.value;
       
-      const activityType = customProps.get('ActivityType');
-      const engagementType = customProps.get('EngagementType');
-      const customerEvent = customProps.get('CustomerEvent');
-      const OnSite = customProps.get('OnSite');
-      const custInteraction = customProps.get('CustInteraction');
-      const clevel = customProps.get('Clevel');
+      const act = customProps.get('ActivityType');
+      const eng = customProps.get('EngagementType');
+      const evt = customProps.get('CustomerEvent');
+
+      // Update fields
+      if (act) document.getElementById('activityType').value = act;
+      if (eng) document.getElementById('engagementType').value = eng;
+      if (evt) document.getElementById('customerEvent').value = evt;
+
+      // Checkboxes - Ensure these IDs match your HTML exactly
+      document.getElementById('OnSite').checked = customProps.get('OnSite') === true;
+      document.getElementById('CustInteraction').checked = customProps.get('CustInteraction') === true;
+      document.getElementById('Clevel').checked = customProps.get('Clevel') === true;
       
-      if (activityType) document.getElementById('activityType').value = activityType;
-      if (engagementType) document.getElementById('engagementType').value = engagementType;
-      if (customerEvent) document.getElementById('customerEvent').value = customerEvent;
-      if (OnSite === true || OnSite === 'true') document.getElementById('OnSite').checked = true;
-      if (custInteraction === true || custInteraction === 'true') document.getElementById('custInteraction').checked = true;
-      if (clevel === true || clevel === 'true') document.getElementById('clevel').checked = true;
-      
+      // CRITICAL: Call validation AFTER the values are set
       validateForm();
     }
   });
