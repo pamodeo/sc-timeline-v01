@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Timeline Sync</title>
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-    <script type="text/javascript" defer src="taskpane.js"></script>
     <link rel="stylesheet" href="taskpane.css">
+	
 </head>
-<body onLoad="Office.onReady()">
-    <script type="text/javascript" defer src="taskpane.js"></script>
+<body onload="Office.onReady()">
+	<!-- App logic -->
+	<script type="text/javascript" defer src="taskpane.js"></script>
     <div class="container">  
         <header>
-            <h2>Timeline Sync v20</h2>
+            <h2>Timeline Sync v21</h2>
         </header>
         
         <main>
@@ -78,11 +79,11 @@
 
             <div class="button-group">
                 <button id="btnSync" class="btn btn-primary">Sync to Timeline</button>
-                <button id="btnCancel" class="btn btn-secondary">Cancel/Close</button>
+                <button id="btnCancel" class="btn btn-secondary">Cancel</button>
             </div>
 
-            <div id="status" class="status-message" style="display: none;"></div>
-            
+            <div id="status" class="status-message"></div>
+			
             <div class="tenant-link">
                 <a href="https://eu1.eam.hxgnsmartcloud.com/web/base/logindisp?tenant=HXGNDEMO0016_DEM" target="_blank">
                     Open Timeline Tenant
@@ -90,5 +91,6 @@
             </div>
         </main>
     </div>
+	<script type="text/javascript" defer src="taskpane.js"></script>
 </body>
 </html>
