@@ -247,9 +247,9 @@ function buildJsonPayload(data) {
     engagementType = '';
   }
   const CreationTime = new Date().toISOString();
-  const OnSite = data.onSite.toString();
-  const CustInteraction = data.custInteraction.toString();
-  const Clevel = data.clevel.toString();
+  const OnSite = data.OnSite.toString();
+  const CustInteraction = data.CustInteraction.toString();
+  const Clevel = data.Clevel.toString();
   const Location =  data.location || '';
   
   const payload = {
