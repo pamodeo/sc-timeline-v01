@@ -1,4 +1,4 @@
-/* global Office  v.24 */
+/* global Office  v.25 */
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
@@ -133,7 +133,6 @@ async function syncToTimeline() {
         // showStatus('Appointment sent to Timeline successfully!\nClick on "Open Timeline Tenant" or "Close"', 'success');
         const msgText = await response.text();
 		showStatus(msgText, 'success'); 
-        }
       } else {
         const errorText = await response.text();
 		const msgTextErr1 = `Error: ${response.status} - ${errorText}`;
