@@ -126,10 +126,9 @@ async function syncToTimeline() {
       });
       
       if (response.ok) {
-        showStatus('Appointment sent to Timeline successfully!', 'success');
-        const openTenant = confirm('Appointment sent to Databridge Pro for Timeline process sync.\\n\\nSelect OK to login to the Timeline tenant\nSelect Cancel to close');
-        if (openTenant) {
-          window.open('https://eu1.eam.hxgnsmartcloud.com/web/base/logindisp?tenant=HXGNDEMO0016_DEM', '_blank');
+        // showStatus('Appointment sent to Timeline successfully!\nClick on "Open Timeline Tenant" or "Close"', 'success');
+        const msgText = await response.text();
+		showStatus(msgText, 'success'); 
         }
       } else {
         const errorText = await response.text();
@@ -138,7 +137,7 @@ async function syncToTimeline() {
       }
     } catch (error) {
 		const msgTextErr2 = `Error: ${error.message}`;
-      showStatus(msgTextErr2, 'error');
+        showStatus(msgTextErr2, 'error');
     }
   });
 }
@@ -251,7 +250,35 @@ function buildJsonPayload(data) {
   const CustInteraction = data.CustInteraction.toString();
   const Clevel = data.Clevel.toString();
   const Location =  data.location || '';
-  
+
+  // EntryID (Standard Office.js itemId)
+  const entryID = Office.context.mailbox.item.itemId || await saveAndGetId();
+  async function saveAndGetId() {
+    return new Promise((resolve) => {
+      Office.context.mailbox.item.saveAsync((result) => {
+        resolve(result.value || ''); // result.value is the EntryID
+      });
+    });
+  }
+  const GlobalID = await getGlobalID();
+  async function getGlobalID() {
+    return new Promise((resolve) => {
+      // We request the 'UID' which is the standard Global identifier for appointments
+      Office.context.mailbox.item.getAllInternetHeadersAsync((result) => {
+        if (result.status === Office.AsyncResultStatus.Succeeded) {
+          const headers = result.value;
+          // The Global ID is usually mapped to the 'vcal-uid' or 'UID' header
+          const globalID = headers["UID"] || headers["vcal-uid"] || "";
+          resolve(globalID);
+        } else {
+          // Fallback: If headers aren't available, some versions of Outlook 
+          // require using an Extended Property (MAPI) via Graph or REST.
+          resolve(""); 
+        }
+      });
+    });
+  }
+
   const payload = {
     EntryID: Office.context.mailbox.item.itemId || '',
     globalID: Office.context.mailbox.item.itemId || '',
