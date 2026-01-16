@@ -9,15 +9,15 @@ Office.onReady((info) => {
     const engagementType = document.getElementById('engagementType');
     const customerEvent = document.getElementById('customerEvent');
     
-    activityType.addEventListener('change', await validateForm);
-    engagementType.addEventListener('change', await validateForm);
-    customerEvent.addEventListener('input', await validateForm);
+    activityType.addEventListener('change', await validateForm());
+    engagementType.addEventListener('change', await validateForm());
+    customerEvent.addEventListener('input', await validateForm());
     
 	// Initial load
     await loadExistingValues();
     
     // Run validation
-    await validateForm;
+    await validateForm();
   }
 });
 
