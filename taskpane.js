@@ -1,4 +1,4 @@
-/* global Office  v.23 */
+/* global Office  v.24 */
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
@@ -14,7 +14,7 @@ Office.onReady((info) => {
     customerEvent.addEventListener('input', validateForm);
     
 	// Initial load
-    await loadExistingValues();
+    loadExistingValues;
     
     // Run validation
     validateForm;
@@ -48,7 +48,7 @@ function validateForm() {
   btnSync.disabled = !isValid;
 }
 
-async function loadExistingValues() {
+function loadExistingValues() {
   Office.context.mailbox.item.loadCustomPropertiesAsync((result) => {
     if (result.status === Office.AsyncResultStatus.Succeeded) {
       const customProps = result.value;
