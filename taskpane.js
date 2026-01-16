@@ -1,4 +1,4 @@
-/* global Office  v.21*/
+/* global Office  v.23 */
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
@@ -9,19 +9,19 @@ Office.onReady((info) => {
     const engagementType = document.getElementById('engagementType');
     const customerEvent = document.getElementById('customerEvent');
     
-    activityType.addEventListener('change', await validateForm());
-    engagementType.addEventListener('change', await validateForm());
-    customerEvent.addEventListener('input', await validateForm());
+    activityType.addEventListener('change', validateForm);
+    engagementType.addEventListener('change',  validateForm);
+    customerEvent.addEventListener('input', validateForm);
     
 	// Initial load
     await loadExistingValues();
     
     // Run validation
-    await validateForm();
+    validateForm;
   }
 });
 
-async function validateForm() {
+function validateForm() {
   const activityType = document.getElementById('activityType').value;
   const engagementType = document.getElementById('engagementType').value;
   const customerEvent = document.getElementById('customerEvent').value;
@@ -68,7 +68,7 @@ async function loadExistingValues() {
       if (Clevel === true || Clevel === 'true') document.getElementById('Clevel').checked = true;
       
       // CRITICAL: Call validation AFTER the values are set
-      await validateForm();
+      validateForm;
     }
   });
 }
