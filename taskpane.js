@@ -186,9 +186,9 @@ async function getAppointmentData(item) {
           data.actType = props.get('ActivityType') || '';
           data.engType = props.get('EngagementType') || '';
           data.custEvt = props.get('CustomerEvent') || data.subject;
-		  data.OnSite = customProps.get('OnSite');
-		  data.CustInteraction = customProps.get('CustInteraction');
-		  data.Clevel = customProps.get('Clevel');
+		  data.OnSite = props.get('OnSite');
+		  data.CustInteraction = props.get('CustInteraction');
+		  data.Clevel = props.get('Clevel');
         }
         resolve(data);
       });
