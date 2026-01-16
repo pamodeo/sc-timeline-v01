@@ -1,4 +1,4 @@
-/* global Office  v.25 */
+/* global Office  v.26 */
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
@@ -82,8 +82,8 @@ function saveCustomProperties(callback) {
       customProps.set('EngagementType', document.getElementById('engagementType').value);
       customProps.set('CustomerEvent', document.getElementById('customerEvent').value);
       customProps.set('OnSite', document.getElementById('OnSite').checked);
-      customProps.set('CustInteraction', document.getElementById('custInteraction').checked);
-      customProps.set('Clevel', document.getElementById('clevel').checked);
+      customProps.set('CustInteraction', document.getElementById('CustInteraction').checked);
+      customProps.set('Clevel', document.getElementById('Clevel').checked);
       
       customProps.saveAsync((saveResult) => {
         if (saveResult.status === Office.AsyncResultStatus.Succeeded) {
