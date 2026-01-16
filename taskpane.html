@@ -7,14 +7,12 @@
     <title>Timeline Sync</title>
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
     <link rel="stylesheet" href="taskpane.css">
-	
+    <script type="text/javascript" defer src="taskpane.js"></script>
 </head>
-<body onload="Office.onReady()">
-	<!-- App logic -->
-	<script type="text/javascript" defer src="taskpane.js"></script>
+<body>
     <div class="container">  
         <header>
-            <h2>Timeline Sync v14</h2>
+            <h2>Timeline Sync v16</h2>
         </header>
         
         <main>
@@ -61,7 +59,7 @@
 
             <div class="form-group checkbox-group">
                 <label>
-                    <input type="checkbox" id="onSite"> On Site
+                    <input type="checkbox" id="OnSite"> On Site
                 </label>
             </div>
 
@@ -78,12 +76,12 @@
             </div>
 
             <div class="button-group">
-                <button id="btnSync" class="btn btn-primary">Sync to Timeline</button>
+                <button id="btnSync" class="btn btn-primary" disabled>Sync to Timeline</button>
                 <button id="btnCancel" class="btn btn-secondary">Cancel</button>
             </div>
 
-            <div id="status" class="status-message"></div>
-			
+            <div id="status" class="status-message" style="display: none;"></div>
+            
             <div class="tenant-link">
                 <a href="https://eu1.eam.hxgnsmartcloud.com/web/base/logindisp?tenant=HXGNDEMO0016_DEM" target="_blank">
                     Open Timeline Tenant
@@ -91,6 +89,5 @@
             </div>
         </main>
     </div>
-    <script src="taskpane.js"></script>
 </body>
 </html>

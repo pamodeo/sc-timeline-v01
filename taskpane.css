@@ -1,9 +1,14 @@
-body {
+* {
+    box-sizing: border-box;
+}
+
+body { 
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
     background-color: #f5f5f5;
+	overflow-x: hidden;
 }
 
 .container {
@@ -129,6 +134,7 @@ main {
     padding: 10px;
     border-radius: 4px;
     display: none;
+	word-wrap: break-word; /* Important for long API error messages */
 }
 
 .status-message.success {

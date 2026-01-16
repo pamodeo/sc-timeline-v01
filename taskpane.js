@@ -53,14 +53,14 @@ function loadExistingValues() {
       const activityType = customProps.get('ActivityType');
       const engagementType = customProps.get('EngagementType');
       const customerEvent = customProps.get('CustomerEvent');
-      const onSite = customProps.get('OnSite');
+      const OnSite = customProps.get('OnSite');
       const custInteraction = customProps.get('CustInteraction');
       const clevel = customProps.get('Clevel');
       
       if (activityType) document.getElementById('activityType').value = activityType;
       if (engagementType) document.getElementById('engagementType').value = engagementType;
       if (customerEvent) document.getElementById('customerEvent').value = customerEvent;
-      if (onSite === true || onSite === 'true') document.getElementById('onSite').checked = true;
+      if (OnSite === true || OnSite === 'true') document.getElementById('OnSite').checked = true;
       if (custInteraction === true || custInteraction === 'true') document.getElementById('custInteraction').checked = true;
       if (clevel === true || clevel === 'true') document.getElementById('clevel').checked = true;
       
@@ -77,7 +77,7 @@ function saveCustomProperties(callback) {
       customProps.set('ActivityType', document.getElementById('activityType').value);
       customProps.set('EngagementType', document.getElementById('engagementType').value);
       customProps.set('CustomerEvent', document.getElementById('customerEvent').value);
-      customProps.set('OnSite', document.getElementById('onSite').checked);
+      customProps.set('OnSite', document.getElementById('OnSite').checked);
       customProps.set('CustInteraction', document.getElementById('custInteraction').checked);
       customProps.set('Clevel', document.getElementById('clevel').checked);
       
@@ -111,7 +111,7 @@ async function syncToTimeline() {
       console.log("data.organizer:", appointmentData.organizer);
       
       // Build JSON payload
-      const json = buildJsonPayload(appointmentData);
+      const json = await buildJsonPayload(appointmentData);
       
       // Send to API
       const response = await fetch('https://dataflow-inbound-message-prd-euc1.eam.hxgnsmartcloud.com/api/message?tag=timeline', {
@@ -195,7 +195,7 @@ async function getAppointmentData(item) {
   });
 }
 
-function buildJsonPayload(data) {
+async function buildJsonPayload(data) {
   // Get owner email (use current user as fallback)
   const ownerEmail = Office.context.mailbox.userProfile.emailAddress;
   
@@ -234,67 +234,47 @@ function buildJsonPayload(data) {
   };
   
   // Clean body
-  let cleanBody = data.body.replace(/\\r\\n/g, ' ').replace(/\\n/g, ' ');
-  cleanBody = cleanBody.replace(/"/g, ' ').replace(/[{}\\[\\]]/g, ' ');
-  cleanBody = cleanBody.substring(0, 255);
-  
-  // Handle PTO
-  let customerEvent = data.custEvt;
-  let engagementType = data.engagementType;
-  if (data.activityType === 'PTO') {
-    data.custEvt = 'Personal Time OFF';
+  let cleanBody = data.body.replace(/[\r\n]+/g, ' ').replace(/"/g, ' ').replace(/[{}\[\]]/g, ' ').substring(0, 255);  
+// Handle PTO
+  let customerEvent = data.custEvt; // Start with the captured subject
+  let engagementType = data.engType;
+  if (data.actType === 'PTO') {
+    customerEvent = 'Personal Time OFF'; // Use the local variable
     engagementType = '';
   }
-  const CreationTime = new Date().toISOString();
-  const OnSite = data.OnSite.toString();
-  const CustInteraction = data.CustInteraction.toString();
-  const Clevel = data.Clevel.toString();
   const Location =  data.location || '';
+  const CreationTime = new Date().toISOString();
+  const OnSite = (data.OnSite ?? false).toString();
+  const CustInteraction = (data.CustInteraction ?? false).toString();
+  const Clevel = (data.Clevel ?? false).toString();
 
-  // EntryID (Standard Office.js itemId)
-  const entryID = Office.context.mailbox.item.itemId || await saveAndGetId();
-  async function saveAndGetId() {
-    return new Promise((resolve) => {
-      Office.context.mailbox.item.saveAsync((result) => {
-        resolve(result.value || ''); // result.value is the EntryID
-      });
+// EntryID (Standard Office.js itemId)
+// Logic fix for IDs:
+  const entryID = Office.context.mailbox.item.itemId || await new Promise(r => Office.context.mailbox.item.saveAsync(res => r(res.value)));
+  
+  const globalID = await new Promise(resolve => {
+    Office.context.mailbox.item.getAllInternetHeadersAsync(result => {
+      const headers = result.value || {};
+      resolve(headers["UID"] || headers["vcal-uid"] || entryID); 
     });
-  }
-  const GlobalID = await getGlobalID();
-  async function getGlobalID() {
-    return new Promise((resolve) => {
-      // We request the 'UID' which is the standard Global identifier for appointments
-      Office.context.mailbox.item.getAllInternetHeadersAsync((result) => {
-        if (result.status === Office.AsyncResultStatus.Succeeded) {
-          const headers = result.value;
-          // The Global ID is usually mapped to the 'vcal-uid' or 'UID' header
-          const globalID = headers["UID"] || headers["vcal-uid"] || "";
-          resolve(globalID);
-        } else {
-          // Fallback: If headers aren't available, some versions of Outlook 
-          // require using an Extended Property (MAPI) via Graph or REST.
-          resolve(""); 
-        }
-      });
-    });
-  }
+  });
 
   const payload = {
-    EntryID: Office.context.mailbox.item.itemId || '',
-    globalID: Office.context.mailbox.item.itemId || '',
+    EntryID: entryID,
+    globalID: globalID,
     Organizer: data.organizer,
     AuthorAlias: aliasStr,
     AuthorFirstname: firstNameStr,
     AuthorLastname: lastNameStr,
     OwnerEmail: ownerEmail,
-    Subject: data.custEvt,
+    Subject: customerEvent,
     Start: formatDate(data.start),
     End: formatDate(data.end),
     Location: Location,
     CreationTime: CreationTime,
     ActivityType: data.actType,
     EngagementType: engagementType,
-    OnSite: onSite,
+    OnSite: OnSite,
     CustInteraction: CustInteraction,
     Clevel: Clevel,
     Note: cleanBody
@@ -312,6 +292,5 @@ function showStatus(message, type) {
 
 function closePane() {
   Office.context.ui.closeContainer();
-
 
 }
