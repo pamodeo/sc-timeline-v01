@@ -144,6 +144,12 @@ main {
     color: #a80000;
     display: block;
 }
+.status-message.debug {
+    background-color: #df8888;
+    border: 1px solid #e81123;
+    color: #443333;
+    display: block;
+}
 
 .tenant-link {
     margin-top: 20px;
