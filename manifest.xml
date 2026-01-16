@@ -6,9 +6,9 @@
            xsi:type="MailApp">
  <!-- IMPORTANT: Generate a unique GUID for your add-in -->
   <!-- You can use: https://www.guidgenerator.com/ -->
-  <Id>6240300b-d190-471a-a9db-69485f07a317</Id>
+  <Id>4765be47-dae3-4769-bf79-5486769c72f3</Id>
   
-  <Version>1.0.0.18</Version>
+  <Version>1.0.0.19</Version>
   <ProviderName>Octave</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Timeline Sync"/>
