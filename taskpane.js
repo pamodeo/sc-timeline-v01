@@ -144,43 +144,53 @@ async function syncToTimeline() {
 }
 
 async function getAppointmentData(item) {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
+    // Helper to handle the "Compose vs Read" difference for strings/dates
+    const getValue = async (property) => {
+      if (property && typeof property.getAsync === 'function') {
+        return new Promise(r => property.getAsync(result => r(result.value || '')));
+      }
+      return property || '';
+    };
+
     const data = {
-      subject: item.subject || '',
-      location: item.location || '',
-      start: item.start,
-      end: item.end,
+      subject: await getValue(item.subject),
+      location: await getValue(item.location),
+      start: await getValue(item.start),
+      end: await getValue(item.end),
       organizer: '',
       body: ''
     };
 
+    // 1. Handle Organizer (It's a bit more complex)
     if (item.organizer) {
-      data.organizer = item.organizer.emailAddress || item.organizer.displayName || '';
+      if (typeof item.organizer.getAsync === 'function') {
+        const orgRes = await new Promise(r => item.organizer.getAsync(r));
+        data.organizer = orgRes.value ? (orgRes.value.emailAddress || orgRes.value.displayName) : '';
+      } else {
+        data.organizer = item.organizer.emailAddress || item.organizer.displayName || '';
+      }
     }
 
-    // 1. Get Body
+    // 2. Get Body (Always Async)
     item.body.getAsync(Office.CoercionType.Text, (result) => {
       if (result.status === Office.AsyncResultStatus.Succeeded) {
         data.body = result.value || '';
       }
 
-      // 2. Get Custom Properties (Nested inside Body callback)
+      // 3. Get Custom Properties
       item.loadCustomPropertiesAsync((propResult) => {
         if (propResult.status === Office.AsyncResultStatus.Succeeded) {
           const props = propResult.value;
+          // Keeping keys short (8-char logic)
           data.actType = props.get('ActivityType') || '';
           data.engType = props.get('EngagementType') || '';
           data.custEvt = props.get('CustomerEvent') || data.subject;
-          data.onSite  = props.get('OnSite') || false;
-          data.cInter  = props.get('CustInteraction') || false;
-          data.clevel  = props.get('Clevel') || false;
         }
-        
-        // 3. Resolve the Promise (Inside the innermost callback)
         resolve(data);
-      }); // End loadCustomPropertiesAsync callback
-    }); // End body.getAsync callback
-  }); // End Promise
+      });
+    });
+  });
 }
 
 function buildJsonPayload(data) {
