@@ -152,7 +152,7 @@ async function getAppointmentData(item) {
       }
       return property || '';
     };
-
+	  
     const data = {
       subject: await getValue(item.subject),
       location: await getValue(item.location),
@@ -186,6 +186,9 @@ async function getAppointmentData(item) {
           data.actType = props.get('ActivityType') || '';
           data.engType = props.get('EngagementType') || '';
           data.custEvt = props.get('CustomerEvent') || data.subject;
+		  data.OnSite = customProps.get('OnSite');
+		  data.CustInteraction = customProps.get('CustInteraction');
+		  data.Clevel = customProps.get('Clevel');
         }
         resolve(data);
       });
@@ -237,13 +240,13 @@ function buildJsonPayload(data) {
   cleanBody = cleanBody.substring(0, 255);
   
   // Handle PTO
-  let customerEvent = data.customerEvent;
+  let customerEvent = data.custEvt;
   let engagementType = data.engagementType;
   if (data.activityType === 'PTO') {
-    customerEvent = 'Personal Time OFF';
+    data.custEvt = 'Personal Time OFF';
     engagementType = '';
   }
-  
+  const CreationTime = new Date().toISOString();
   const payload = {
     EntryID: Office.context.mailbox.item.itemId || '',
     globalID: Office.context.mailbox.item.itemId || '',
@@ -252,11 +255,11 @@ function buildJsonPayload(data) {
     AuthorFirstname: firstNameStr,
     AuthorLastname: lastNameStr,
     OwnerEmail: ownerEmail,
-    Subject: customerEvent,
+    Subject: data.custEvt,
     Start: formatDate(data.start),
     End: formatDate(data.end),
     Location: data.location || '',
-    CreationTime: new Date().toISOString(),
+    CreationTime: CreationTime,
     ActivityType: data.activityType,
     EngagementType: engagementType,
     OnSite: data.onSite.toString(),
