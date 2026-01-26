@@ -20,8 +20,13 @@ Office.onReady((info) => {
     validateForm;
   }
 });
+function waitTime(myMilliSec) {
+    return new Promise(resolve => setTimeout(resolve, myMilliSec));
+}
 
 function validateForm() {
+  await waitTime(10000); // wait 10 seconds just to let me enter in debug
+
   const activityType = document.getElementById('activityType').value;
   const engagementType = document.getElementById('engagementType').value;
   const customerEvent = document.getElementById('customerEvent').value;
@@ -311,5 +316,6 @@ function showStatus(message, type) {
 
 function closePane() {
   Office.context.ui.closeContainer();
+
 
 }
