@@ -25,7 +25,7 @@ function waitTime(myMilliSec) {
 }
 
 function validateForm() {
-  await waitTime(10000); // wait 10 seconds just to let me enter in debug
+  waitTime(10000); // wait 10 seconds just to let me enter in debug
 
   const activityType = document.getElementById('activityType').value;
   const engagementType = document.getElementById('engagementType').value;
@@ -319,3 +319,4 @@ function closePane() {
 
 
 }
+
