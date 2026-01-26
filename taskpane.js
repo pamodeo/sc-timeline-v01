@@ -1,6 +1,9 @@
 /* global Office  v.27 */
 
 Office.onReady((info) => {
+
+  waitTime(10000); // wait 10 seconds just to let me enter in debug
+
   if (info.host === Office.HostType.Outlook) {
     document.getElementById('btnSync').onclick = syncToTimeline;
     document.getElementById('btnCancel').onclick = closePane;
@@ -25,8 +28,6 @@ function waitTime(myMilliSec) {
 }
 
 function validateForm() {
-  waitTime(10000); // wait 10 seconds just to let me enter in debug
-
   const activityType = document.getElementById('activityType').value;
   const engagementType = document.getElementById('engagementType').value;
   const customerEvent = document.getElementById('customerEvent').value;
@@ -319,4 +320,5 @@ function closePane() {
 
 
 }
+
 
