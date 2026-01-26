@@ -20,7 +20,7 @@
         <main>
             <div class="form-group">
                 <label for="activityType">Activity Type *</label>
-                <select id="activityType" class="form-control">
+                <select id="activityType" class="form-control" onchange="validateform()">
                     <option value="">-- Select Activity Type --</option>
                     <option value="BVA_VE">BVA_VE</option>
                     <option value="DEMO">DEMO</option>
@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="engagementType">Engagement Type *</label>
-                <select id="engagementType" class="form-control">
+                <select id="engagementType" class="form-control" onchange="validateform()">
                     <option value="">-- Select Engagement Type --</option>
                     <option value="CUSTOMER">CUSTOMER</option>
                     <option value="EVENT">EVENT</option>
@@ -56,24 +56,24 @@
 
             <div class="form-group">
                 <label for="customerEvent">Customer Event *</label>
-                <input type="text" id="customerEvent" class="form-control" placeholder="Enter customer event">
+                <input type="text" id="customerEvent" class="form-control" placeholder="Enter customer event" onchange="validateform()">
             </div>
 
             <div class="form-group checkbox-group">
                 <label>
-                    <input type="checkbox" id="OnSite"> On Site
+                    <input type="checkbox" id="OnSite" onchange="validateform()"> On Site
                 </label>
             </div>
 
             <div class="form-group checkbox-group">
                 <label>
-                    <input type="checkbox" id="CustInteraction"> Customer Interaction
+                    <input type="checkbox" id="CustInteraction" onchange="validateform()"> Customer Interaction
                 </label>
             </div>
 
             <div class="form-group checkbox-group">
                 <label>
-                    <input type="checkbox" id="Clevel"> C-Level
+                    <input type="checkbox" id="Clevel" onchange="validateform()"> C-Level
                 </label>
             </div>
 
@@ -85,6 +85,7 @@
             <div id="status" class="status-message"></div>
 			
             <div class="tenant-link">
+				Follow this link if you want to open EAM Timeline tenant 
                 <a href="https://eu1.eam.hxgnsmartcloud.com/web/base/logindisp?tenant=HXGNDEMO0016_DEM" target="_blank">
                     Open Timeline Tenant
                 </a>
@@ -93,4 +94,5 @@
     </div>
 	<script type="text/javascript" defer src="taskpane.js"></script>
 </body>
+
 </html>
