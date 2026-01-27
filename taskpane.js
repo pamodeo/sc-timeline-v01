@@ -2,8 +2,6 @@
 
 Office.onReady((info) => {
 
-  waitTime(10000); // wait 10 seconds just to let me enter in debug
-
   if (info.host === Office.HostType.Outlook) {
     document.getElementById('btnSync').onclick = syncToTimeline;
     document.getElementById('btnCancel').onclick = closePane;
@@ -17,15 +15,14 @@ Office.onReady((info) => {
     customerEvent.addEventListener('input', validateForm);
     
 	// Initial load
-    loadExistingValues;
+	console.log("loading data");
+    loadExistingValues();
     
     // Run validation
-    validateForm;
+	console.log("validate form");
+    validateForm();
   }
 });
-function waitTime(myMilliSec) {
-    return new Promise(resolve => setTimeout(resolve, myMilliSec));
-}
 
 function validateForm() {
   const activityType = document.getElementById('activityType').value;
@@ -55,6 +52,7 @@ function validateForm() {
 }
 
 function loadExistingValues() {
+	console.log("start loading data");
   Office.context.mailbox.item.loadCustomPropertiesAsync((result) => {
     if (result.status === Office.AsyncResultStatus.Succeeded) {
       const customProps = result.value;
@@ -65,6 +63,7 @@ function loadExistingValues() {
       const OnSite = customProps.get('OnSite');
       const CustInteraction = customProps.get('CustInteraction');
       const Clevel = customProps.get('Clevel');
+	console.log("ActivityType" + activityType);
       
       if (activityType) document.getElementById('activityType').value = activityType;
       if (engagementType) document.getElementById('engagementType').value = engagementType;
