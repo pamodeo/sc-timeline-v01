@@ -1,4 +1,4 @@
-/* global Office  v.27 */
+/* global Office  v.001 */
 
 Office.onReady((info) => {
 
@@ -15,11 +15,11 @@ Office.onReady((info) => {
     customerEvent.addEventListener('input', validateForm);
     
 	// Initial load
-	console.log("loading data");
+	console.log("");
     loadExistingValues();
     
     // Run validation
-	console.log("validate form");
+	console.log("");
     validateForm();
   }
 });
@@ -52,7 +52,6 @@ function validateForm() {
 }
 
 function loadExistingValues() {
-	console.log("start loading data");
   Office.context.mailbox.item.loadCustomPropertiesAsync((result) => {
     if (result.status === Office.AsyncResultStatus.Succeeded) {
       const customProps = result.value;
@@ -63,7 +62,6 @@ function loadExistingValues() {
       const OnSite = customProps.get('OnSite');
       const CustInteraction = customProps.get('CustInteraction');
       const Clevel = customProps.get('Clevel');
-	console.log("ActivityType" + activityType);
       
       if (activityType) document.getElementById('activityType').value = activityType;
       if (engagementType) document.getElementById('engagementType').value = engagementType;
@@ -319,5 +317,6 @@ function closePane() {
 
 
 }
+
 
 
